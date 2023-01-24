@@ -1,9 +1,6 @@
 package com.example.axondemo.command
 
-import com.example.axondemo.api.CreateProductCommand
-import com.example.axondemo.api.ProductCreatedEvent
-import com.example.axondemo.api.ProductUpdatedEvent
-import com.example.axondemo.api.UpdateProductCommand
+import com.example.axondemo.api.*
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.modelling.command.AggregateIdentifier
@@ -45,5 +42,16 @@ class ProductAggregate() {
     @EventSourcingHandler
     fun on(event: ProductUpdatedEvent) {
         name = event.name
+    }
+
+    @CommandHandler
+    fun handle(command: DeleteProductCommand): UUID {
+        AggregateLifecycle.apply(ProductDeletedEvent(command.productId))
+        return command.productId
+    }
+
+    @EventSourcingHandler
+    fun on(event: ProductDeletedEvent) {
+        AggregateLifecycle.markDeleted()
     }
 }
