@@ -1,9 +1,11 @@
 package com.example.axondemo.controller
 
 import com.example.axondemo.api.CreateProductCommand
+import com.example.axondemo.api.DeleteProductCommand
 import com.example.axondemo.api.UpdateProductCommand
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
@@ -28,6 +30,11 @@ class ProductController {
     fun updateProduct(@PathVariable("productId") productId: UUID,
                       @RequestBody request: UpdateProductRequest): CompletableFuture<String> {
         return commandGateway.send<String>(UpdateProductCommand(productId, request.name, request.description, request.price))
+    }
+
+    @DeleteMapping("/product/{productId}")
+    fun updateProduct(@PathVariable("productId") productId: UUID): CompletableFuture<String> {
+        return commandGateway.send<String>(DeleteProductCommand(productId))
     }
 }
 
