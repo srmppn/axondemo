@@ -31,15 +31,3 @@ class ProductController {
     }
 }
 
-data class CreateProductRequest(
-    val name: String,
-    val description: String,
-    val price: BigDecimal
-)
-
-
-data class UpdateProductRequest(
-    val name: String,
-    val description: String,
-    val price: BigDecimal
-)

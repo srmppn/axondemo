@@ -11,6 +11,7 @@ import org.axonframework.modelling.command.AggregateLifecycle
 import org.axonframework.spring.stereotype.Aggregate
 import java.util.UUID
 
+// 1..n
 @Aggregate
 class ProductAggregate() {
 
