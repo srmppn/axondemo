@@ -6,10 +6,10 @@ import java.util.UUID
 
 data class DeleteProductCommand(
     @TargetAggregateIdentifier
-    val productId: UUID
+    val productId: String
 )
 
 @Revision("1.0")
 data class ProductDeletedEvent(
-    val productId: UUID
+    val productId: String
 )

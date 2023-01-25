@@ -6,7 +6,7 @@ import java.util.*
 
 @Revision("1.0")
 data class ProductUpdatedEvent(
-    val productId: UUID,
+    val productId: String,
     val name: String,
     val description: String,
     val price: BigDecimal
