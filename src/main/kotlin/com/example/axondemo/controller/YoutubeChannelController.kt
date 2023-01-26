@@ -26,9 +26,8 @@ class YoutubeChannelController {
     @PostMapping("/channel/vk")
     fun createVkChannel(@RequestBody request: CreateChannelRequest): CompletableFuture<String> {
         return commandGateway.send<String>(
-            CreateYoutubeChannelCommand(UUID.randomUUID().toString(), request.name, request.description))
+            CreateVkChannelCommand(UUID.randomUUID().toString(), request.name, request.description))
     }
-
 
     @PutMapping("/channel/{channelId}/subscribe")
     fun subscribeChannel(@PathVariable("channelId") channelId: String): CompletableFuture<String> {
@@ -57,8 +56,8 @@ class YoutubeChannelController {
 
     @PutMapping("/channel/{channelId}/video/{videoId}")
     fun updateVideo(@PathVariable("channelId") channelId: String,
-                     @PathVariable("videoId") videoId: String,
-                     @RequestBody request: UpdateVideoRequest): CompletableFuture<String> {
+                    @PathVariable("videoId") videoId: String,
+                    @RequestBody request: UpdateVideoRequest): CompletableFuture<String> {
         return commandGateway.send<String>(
             UpdateVideoCommand(channelId, videoId, request.name))
     }

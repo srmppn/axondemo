@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.axonframework:axon-spring-boot-starter:4.6.1")
+	implementation("org.axonframework:axon-spring-boot-starter:4.6.2")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")

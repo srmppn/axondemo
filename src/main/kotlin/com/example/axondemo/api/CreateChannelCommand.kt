@@ -10,13 +10,6 @@ data class CreateYoutubeChannelCommand(
     val description: String
 )
 
-@Revision("1.0")
-data class YoutubeChannelCreatedEvent(
-    val channelId: String,
-    val name: String,
-    val description: String
-)
-
 data class CreateVkChannelCommand(
     @TargetAggregateIdentifier
     val channelId: String,
@@ -25,7 +18,7 @@ data class CreateVkChannelCommand(
 )
 
 @Revision("1.0")
-data class VkChannelCreatedEvent(
+data class ChannelCreatedEvent(
     val channelId: String,
     val name: String,
     val description: String
