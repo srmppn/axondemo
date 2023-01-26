@@ -17,11 +17,35 @@ abstract class Channel {
     lateinit var name: String
     lateinit var description: String
 
+    var isConfirmed: Boolean = false
 
     @AggregateMember
     lateinit var videos: MutableList<VideoAggregate>
 
     lateinit var channelStatus: ChannelStatus
+
+    @EventSourcingHandler
+    fun on(event: CreateChannelRequestedEvent) {
+        channelId = event.channelId
+    }
+
+    @CommandHandler
+    fun handle(command: ConfirmChannelCreationCommand): String {
+        AggregateLifecycle.apply(ConfirmChannelCreationRequestedEvent(command.channelId, command.passcode))
+        return command.channelId
+    }
+
+    @CommandHandler
+    fun handle(command: ApproveConfirmationCommand): String {
+        AggregateLifecycle.apply(ChannelCreationConfirmedEvent(command.channelId))
+        AggregateLifecycle.apply(ChannelCreatedEvent(command.channelId, command.name, command.description))
+        return command.channelId
+    }
+
+    @EventSourcingHandler
+    fun on(event: ChannelCreationConfirmedEvent) {
+        isConfirmed = true
+    }
 
     @EventSourcingHandler
     fun on(event: ChannelCreatedEvent) {

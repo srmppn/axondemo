@@ -18,6 +18,13 @@ data class CreateVkChannelCommand(
 )
 
 @Revision("1.0")
+data class CreateChannelRequestedEvent(
+    val channelId: String,
+    val name: String,
+    val description: String
+)
+
+@Revision("1.0")
 data class ChannelCreatedEvent(
     val channelId: String,
     val name: String,

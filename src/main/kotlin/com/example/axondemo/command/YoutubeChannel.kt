@@ -15,7 +15,7 @@ class YoutubeChannel(): Channel() {
     @CommandHandler
     constructor(command: CreateYoutubeChannelCommand): this() {
         AggregateLifecycle.apply(
-            ChannelCreatedEvent(command.channelId, command.name, command.description))
+            CreateChannelRequestedEvent(command.channelId, command.name, command.description))
     }
 
     @CommandHandler
