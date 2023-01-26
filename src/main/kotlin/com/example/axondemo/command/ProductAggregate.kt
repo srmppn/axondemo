@@ -6,23 +6,19 @@ import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.modelling.command.AggregateIdentifier
 import org.axonframework.modelling.command.AggregateLifecycle
 import org.axonframework.spring.stereotype.Aggregate
-import java.util.UUID
 
 // 1..n
 @Aggregate
 class ProductAggregate() {
 
     @AggregateIdentifier
-    private lateinit var productId: UUID
+    private lateinit var productId: String
 
     private lateinit var name: String
 
     @CommandHandler
-    constructor(command: CreateProductCommand): this() {
-        AggregateLifecycle.apply(ProductCreatedEvent(command.productId,
-                                                     command.name,
-                                                     command.description,
-                                                     command.price))
+    constructor(command: CreateProductCommand) : this() {
+        AggregateLifecycle.apply(ProductCreatedEvent(command.productId, command.name, command.description, command.price))
     }
 
     @EventSourcingHandler
@@ -32,11 +28,9 @@ class ProductAggregate() {
     }
 
     @CommandHandler
-    fun handle(command: UpdateProductCommand) {
-        AggregateLifecycle.apply(ProductUpdatedEvent(command.productId,
-                                                     command.name,
-                                                     command.description,
-                                                     command.price))
+    fun handle(command: UpdateProductCommand): String {
+        AggregateLifecycle.apply(ProductUpdatedEvent(command.productId, command.name, command.description, command.price))
+        return command.productId
     }
 
     @EventSourcingHandler
@@ -45,7 +39,7 @@ class ProductAggregate() {
     }
 
     @CommandHandler
-    fun handle(command: DeleteProductCommand): UUID {
+    fun handle(command: DeleteProductCommand): String {
         AggregateLifecycle.apply(ProductDeletedEvent(command.productId))
         return command.productId
     }

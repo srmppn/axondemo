@@ -10,5 +10,6 @@ data class Product(
     val productId: String,
     val name: String,
     val description: String,
-    val price: BigDecimal
+    val price: BigDecimal,
+    val isDeleted: Boolean = false
 )

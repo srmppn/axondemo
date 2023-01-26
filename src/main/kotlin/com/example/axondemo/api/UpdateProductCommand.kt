@@ -6,7 +6,7 @@ import java.util.*
 
 data class UpdateProductCommand(
     @TargetAggregateIdentifier
-    val productId: UUID,
+    val productId: String,
     val name: String,
     val description: String,
     val price: BigDecimal
