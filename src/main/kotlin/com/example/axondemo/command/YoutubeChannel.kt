@@ -10,10 +10,11 @@ import org.axonframework.spring.stereotype.Aggregate
 @Aggregate
 class YoutubeChannel(): Channel() {
 
-    private var subscriber: Int = 0
+    var subscriber: Int = 0
 
     @CommandHandler
     constructor(command: CreateYoutubeChannelCommand): this() {
+        // 1, 2, 3
         AggregateLifecycle.apply(
             CreateChannelRequestedEvent(command.channelId, command.name, command.description))
     }

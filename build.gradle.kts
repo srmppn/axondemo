@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
 	implementation("org.axonframework:axon-spring-boot-starter:4.6.2")
+	implementation("org.yaml:snakeyaml:1.26")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -27,8 +28,10 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.axonframework:axon-test:4.6.1")
+	testImplementation("org.jeasy:easy-random-bean-validation:4.1.0")
 	testImplementation("io.projectreactor:reactor-test")
-
+	testImplementation("org.mockito:mockito-core:3.3.3")
 }
 
 tasks.withType<KotlinCompile> {
